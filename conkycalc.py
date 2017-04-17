@@ -10,14 +10,17 @@ from lxml import html
 import requests
 import re
 
+profile = 'https://www.last.fm/user/StonedEars'
+joined = '09/01/2009'
+
 # Get the days between today and my lastm joined date
 date_format = "%d/%m/%Y"
-a = datetime.strptime('09/1/2009', date_format)
+a = datetime.strptime(joined, date_format)
 b = datetime.strptime(time.strftime("%d/%m/%Y"), date_format)
 delta = b - a
 
 # get the current playcount from lastfm
-page = requests.get('https://www.last.fm/user/StonedEars')
+page = requests.get(profile)
 tree = html.fromstring(page.content)
 playcount = tree.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
 cleancount = int(re.sub("[^\d\.]", "", playcount[0])) / int(delta.days + 1)
