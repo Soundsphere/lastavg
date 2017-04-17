@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # this thing lets me calculate the average songs I played since I joined lastfm.
 # Sure, the website tells me as well, but I want to have at least a few
-# decimals, to see if it changes.
+# decimals, to see the changes.
 
 from datetime import date, datetime
 import time
