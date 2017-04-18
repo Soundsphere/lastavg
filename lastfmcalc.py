@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-# this thing lets me calculate the average songs I played since I joined lastfm.
+# This program shows me the average scrobbles per day.
 # Sure, the website tells me as well, but I want to have at least a few
-# decimals, to see the changes.
+# decimals, to see the changes over time.
 
 from datetime import date, datetime
 import time
@@ -9,10 +9,11 @@ from lxml import html
 import requests
 import re
 
+# Enter your details here
 profile = 'https://www.last.fm/user/StonedEars'
 joined = '09/01/2009'
 
-# Get the days between today and my lastm joined date
+# Get the days between today and the lastfm joined date
 date_format = "%d/%m/%Y"
 date_joined = datetime.strptime(joined, date_format)
 today = datetime.strptime(time.strftime("%d/%m/%Y"), date_format)
