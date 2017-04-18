@@ -14,6 +14,5 @@ To use with your own last.fm account, replace the following variables:
 ---
 
 If you want to display the average in conky, use the following line in conky:
-> make sure to change the variables in conkycalc.py to your profile before using it
 
-`{execi -3600 /path/to/script/conkycalc.py }`
+`{execi -3600 /path/to/script/lastfmcalc.py | tail -n1 }`

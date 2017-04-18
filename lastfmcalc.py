@@ -27,4 +27,4 @@ cleancount = int(re.sub("[^\d\.]", "", playcount[0])) / int(delta.days + 1)
 # Display the stuff
 print ("Played Tracks: " + playcount[0])
 print ("Passed Days: " + str(int(delta.days + 1)))
-print ("Average: " + str("%.4f" % cleancount))
+print (" -- Average -- " + '\n' + str("%.4f" % cleancount))
