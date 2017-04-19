@@ -1,5 +1,4 @@
-# L![lastfmlogo](https://www.last.fm/static/images/footer_logo.ddcfd65712a6.png "Lastfm")tavg
-
+# L![lastfmlogo](/docs/icon.png?raw=true "Lastfm")tavg
 :musical_note: :notes:
 Check your average playcount up to four decimals :notes: :musical_note:
 
