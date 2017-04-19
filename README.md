@@ -12,7 +12,7 @@ At the moment there's no executable, so just run the following:
 ```
 git clone https://github.com/Soundsphere/lastavg.git
 cd lastavg
-python lastfmcalc.py
+python lastavg.py
 ```
 
 _Alternatively you can copy the script into your $PATH and chmod +x the script so that you can just call it from anywhere_
@@ -28,7 +28,7 @@ To use with your own last.fm account, replace the following variables:
 ## Conky
 If you want to display the average in conky, use the following line in your .conkyrc:
 
-`{execi -3600 /path/to/script/lastfmcalc.py | tail -n1 | cut -d" " -f2 }`
+`{execi -3600 /path/to/script/lastavg.py | tail -n1 | cut -d" " -f2 }`
 
 
 ## Screenshot
