@@ -12,11 +12,10 @@ At the moment there's no executable, so just run the following:
 ```
 git clone https://github.com/Soundsphere/lastavg.git
 cd lastavg
-chmod +x lastfmcalc.py
 python lastfmcalc.py
 ```
 
-_Alternatively you can copy the script into your $PATH_
+_Alternatively you can copy the script into your $PATH and chmod +x the script so that you can just call it from anywhere_
 
 ## Usage
 To use with your own last.fm account, replace the following variables:
