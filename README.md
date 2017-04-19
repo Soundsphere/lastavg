@@ -20,3 +20,10 @@ To use with your own last.fm account, replace the following variables:
 If you want to display the average in conky, use the following line in your .conkyrc:
 
 `{execi -3600 /path/to/script/lastfmcalc.py | tail -n1 | cut -d" " -f2 }`
+
+---
+
+## Screenshot
+
+Here's how the output looks like:
+![lastavgscreenshot](/docs/lastavgscreen.png?raw=true "lastavg output")
