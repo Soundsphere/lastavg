@@ -11,7 +11,7 @@ Run `pip install -r requirements.txt` to set everything up
 
 To use with your own last.fm account, replace the following variables:
 
-`profile` = the link to your profile
+`username` = your last.fm username
 
 `joined` = the date you joined last.fm
 
