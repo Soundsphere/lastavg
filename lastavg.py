@@ -22,10 +22,10 @@ delta = today - date_joined
 # get the current playcount from lastfm
 page = requests.get('https://www.last.fm/user/' + username)
 stuff = html.fromstring(page.content)
-play_count = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
-clean_count = int(re.sub("[^\d\.]", "", play_count[0])) / int(delta.days + 1)
+playcount = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
+cleancount = int(re.sub("[^\d\.]", "", playcount[0])) / int(delta.days + 1)
 
 # Display the stuff
 print ("Scrobbled Tracks: " + playcount[0])
 print ("Passed Days: " + str(int(delta.days + 1)))
-print ("Average: " + str("%.4f" % clean_count))
+print ("Average: " + str("%.4f" % cleancount))
