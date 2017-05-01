@@ -2,6 +2,8 @@
 :musical_note: :notes:
 Check your average playcount up to four decimals :notes: :musical_note:
 
+Now you can also see the scrobbles and the average from the last 7, 30, 90, 180 and 365 days.
+
 ---
 ## Requirements
 Run `pip install -r requirements.txt` to set everything up
