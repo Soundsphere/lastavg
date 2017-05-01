@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # This program shows me the average scrobbles per day.
 # Sure, the website tells me as well, but I want to have at least a few
-# decimals, to see the changes over time.
+# decimals, to see the changes over time. It also displays the average
+# for the last 7, 30, 90, 180 and 365 on one page
 
 from datetime import date, datetime
 import time
@@ -9,9 +10,11 @@ from lxml import html
 import requests
 import re
 
+# set a few things like days and the intereger for the for loop
 days = [7, 30, 90, 180, 365]
 d = len(days)
 a = 0
+
 # Enter your details here
 username = 'StonedEars'
 joined = '09/01/2009'
@@ -28,7 +31,9 @@ stuff = html.fromstring(page.content)
 playcount = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
 cleancount = int(re.sub("[^\d\.]", "", playcount[0])) / int(delta.days + 1)
 
-# get the current playcout from the last n days
+# get the current playcout from the last n days. This for-loop iterates
+# 5 times to get the average and the playcount for each number of days
+# stored in the days list and displays the output
 for i in range (d):
     lastpage = requests.get('https://www.last.fm/user/' + username + '/library?date_preset=LAST_' + str(days[i]) + '_DAYS')
     laststuff = html.fromstring(lastpage.content)
