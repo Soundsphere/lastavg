@@ -2,7 +2,7 @@
 :musical_note: :notes:
 Check your average playcount up to four decimals :notes: :musical_note:
 
-Now you can also see the scrobbles and the average from the last 7, 30, 90, 180 and 365 days.
+Now you can also see the scrobbles and the average from the last 7, 30, 90, 180 and 365 days + the artists you listened to in that timeframe
 
 ---
 ## Requirements

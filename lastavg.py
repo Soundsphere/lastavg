@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # This program shows me the average scrobbles per day.
 # Sure, the website tells me as well, but I want to have at least a few
-# decimals, to see the changes over time. It also displays the average
-# for the last 7, 30, 90, 180 and 365 on one page
+# decimals, to see the changes over time. It also displays the average scrobbles
+# and artists for the last 7, 30, 90, 180 and 365 on one page
 
 from datetime import date, datetime
 import time
@@ -26,27 +26,39 @@ today = datetime.strptime(time.strftime("%d/%m/%Y"), date_format)
 delta = today - date_joined
 
 # get the current playcount from lastfm overall
-page = requests.get('https://www.last.fm/user/' + username)
-stuff = html.fromstring(page.content)
+page_scrobbles = requests.get('https://www.last.fm/user/' + username)
+stuff = html.fromstring(page_scrobbles.content)
 playcount = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
 cleancount = int(re.sub("[^\d\.]", "", playcount[0])) / int(delta.days + 1)
 
-# get the current playcout from the last n days. This for-loop iterates
-# 5 times to get the average and the playcount for each number of days
+# get the current amount of different artists scrobbled from lastfm overall
+page_artists = requests.get('https://www.last.fm/user/' + username + '/library/artists')
+stuff_artists = html.fromstring(page_artists.content)
+artists = stuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
+
+
+# get the current playcout and the different artists scrobbled from the last n days.
+#This for-loop iterates 5 times to get the average and the playcount for each number of days
 # stored in the days list and displays the output
 for i in range (d):
-    lastpage = requests.get('https://www.last.fm/user/' + username + '/library?date_preset=LAST_' + str(days[i]) + '_DAYS')
-    laststuff = html.fromstring(lastpage.content)
-    lastscrob = laststuff.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[1]/p/text()')
-    lastavg = laststuff.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[2]/p/text()')
+    lastpage_scrobbles = requests.get('https://www.last.fm/user/' + username + '/library?date_preset=LAST_' + str(days[i]) + '_DAYS')
+    lastpage_artists = requests.get('https://www.last.fm/user/StonedEars/library/artists?date_preset=LAST_' + str(days[i]) + '_DAYS')
+    laststuff_scrobbles = html.fromstring(lastpage_scrobbles.content)
+    laststuff_artists = html.fromstring(lastpage_artists.content)
+    lastart = laststuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
+    lastscrob = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[1]/p/text()')
+    lastavg = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[2]/p/text()')
+    # print the results from the website
     print ("Last " + str(days[i]) + " Days:")
+    print ("Scrobbled Artists: " + lastart[a])
     print ("Scrobbled Tracks: " + lastscrob[a])
     print ("Average: " + lastavg[a])
     print ("")
     a + 1
 
 # Display the overall average
-print ("Overall")
+print ("Overall:")
+print ("Scrobbled Artists: " + artists[0])
 print ("Scrobbled Tracks: " + playcount[0])
 print ("Passed Days: " + str(int(delta.days + 1)))
 print ("Average: " + str("%.4f" % cleancount))
