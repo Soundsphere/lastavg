@@ -42,7 +42,7 @@ artists = stuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/
 # stored in the days list and displays the output
 for i in range (d):
     lastpage_scrobbles = requests.get('https://www.last.fm/user/' + username + '/library?date_preset=LAST_' + str(days[i]) + '_DAYS')
-    lastpage_artists = requests.get('https://www.last.fm/user/StonedEars/library/artists?date_preset=LAST_' + str(days[i]) + '_DAYS')
+    lastpage_artists = requests.get('https://www.last.fm/user/' + username + '/library/artists?date_preset=LAST_' + str(days[i]) + '_DAYS')
     laststuff_scrobbles = html.fromstring(lastpage_scrobbles.content)
     laststuff_artists = html.fromstring(lastpage_artists.content)
     lastart = laststuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
