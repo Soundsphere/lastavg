@@ -30,7 +30,7 @@ To use with your own last.fm account, replace the following variables:
 ## Conky
 If you want to display the average in conky, use the following line in your .conkyrc:
 
-`{execi -3600 /path/to/script/lastavg.py | tail -n1 | cut -d" " -f2 }`
+`{execi 3600 /path/to/script/lastavg.py | tail -n1 | cut -d" " -f2 }`
 
 
 ## Screenshot
