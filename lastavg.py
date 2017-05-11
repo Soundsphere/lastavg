@@ -28,14 +28,13 @@ delta = today - date_joined
 # get the current playcount from lastfm overall
 page_scrobbles = requests.get('https://www.last.fm/user/' + username)
 stuff = html.fromstring(page_scrobbles.content)
-playcount = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
-cleancount = int(re.sub("[^\d\.]", "", playcount[0])) / int(delta.days + 1)
+page_scrobbles = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
+cleancount = int(re.sub("[^\d\.]", "", page_scrobbles[0])) / int(delta.days + 1)
 
 # get the current amount of different artists scrobbled from lastfm overall
 page_artists = requests.get('https://www.last.fm/user/' + username + '/library/artists')
 stuff_artists = html.fromstring(page_artists.content)
 artists = stuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
-
 
 # get the current playcout and the different artists scrobbled from the last n days.
 #This for-loop iterates 5 times to get the average and the playcount for each number of days
@@ -45,20 +44,19 @@ for i in range (d):
     lastpage_artists = requests.get('https://www.last.fm/user/' + username + '/library/artists?date_preset=LAST_' + str(days[i]) + '_DAYS')
     laststuff_scrobbles = html.fromstring(lastpage_scrobbles.content)
     laststuff_artists = html.fromstring(lastpage_artists.content)
-    lastart = laststuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
-    lastscrob = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[1]/p/text()')
+    lastpage_scrobbles = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[1]/p/text()')
+    lastpage_artists = laststuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
     lastavg = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[2]/p/text()')
     # print the results from the website
     print ("Last " + str(days[i]) + " Days:")
-    print ("Scrobbled Artists: " + lastart[a])
-    print ("Scrobbled Tracks: " + lastscrob[a])
-    print ("Average: " + lastavg[a])
-    print ("")
+    print ("Scrobbled Artists: " + lastpage_artists[a])
+    print ("Scrobbled Tracks: " + lastpage_scrobbles[a])
+    print ("Average: " + lastavg[a] + "\n")
     a + 1
 
 # Display the overall average
 print ("Overall:")
 print ("Scrobbled Artists: " + artists[0])
-print ("Scrobbled Tracks: " + playcount[0])
+print ("Scrobbled Tracks: " + page_scrobbles[0])
 print ("Passed Days: " + str(int(delta.days + 1)))
 print ("Average: " + str("%.4f" % cleancount))
