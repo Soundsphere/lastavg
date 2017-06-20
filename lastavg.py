@@ -36,6 +36,9 @@ page_artists = requests.get('https://www.last.fm/user/' + username + '/library/a
 stuff_artists = html.fromstring(page_artists.content)
 artists = stuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
 
+# Print some sort of header
+print("Stats for " + username + ":\n")
+
 # get the current playcout and the different artists scrobbled from the last n days.
 #This for-loop iterates 5 times to get the average and the playcount for each number of days
 # stored in the days list and displays the output
