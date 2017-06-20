@@ -15,7 +15,7 @@ days = [7, 30, 90, 180, 365]
 d = len(days)
 a = 0
 
-# Enter your details here
+# Enter your details here. Date format is DD/MM/YYYY
 username = 'StonedEars'
 joined = '09/01/2009'
 
@@ -25,22 +25,10 @@ date_joined = datetime.strptime(joined, date_format)
 today = datetime.strptime(time.strftime("%d/%m/%Y"), date_format)
 delta = today - date_joined
 
-# get the current playcount from lastfm overall
-page_scrobbles = requests.get('https://www.last.fm/user/' + username)
-stuff = html.fromstring(page_scrobbles.content)
-page_scrobbles = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
-cleancount = int(re.sub("[^\d\.]", "", page_scrobbles[0])) / int(delta.days + 1)
-
-# get the current amount of different artists scrobbled from lastfm overall
-page_artists = requests.get('https://www.last.fm/user/' + username + '/library/artists')
-stuff_artists = html.fromstring(page_artists.content)
-artists = stuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
-
 # Print some sort of header
 print("Stats for " + username + ":\n")
 
-# get the current playcout and the different artists scrobbled from the last n days.
-#This for-loop iterates 5 times to get the average and the playcount for each number of days
+# This for-loop iterates 5 times to get the average, the playcount and the scrobbled artists for each number of days
 # stored in the days list and displays the output
 for i in range (d):
     lastpage_scrobbles = requests.get('https://www.last.fm/user/' + username + '/library?date_preset=LAST_' + str(days[i]) + '_DAYS')
@@ -56,6 +44,17 @@ for i in range (d):
     print ("Scrobbled Tracks: " + lastpage_scrobbles[a])
     print ("Average: " + lastavg[a] + "\n")
     a + 1
+
+# get the current playcount from lastfm overall
+page_scrobbles = requests.get('https://www.last.fm/user/' + username)
+stuff = html.fromstring(page_scrobbles.content)
+page_scrobbles = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
+cleancount = int(re.sub("[^\d\.]", "", page_scrobbles[0])) / int(delta.days + 1)
+
+# get the current amount of different artists scrobbled from lastfm overall
+page_artists = requests.get('https://www.last.fm/user/' + username + '/library/artists')
+stuff_artists = html.fromstring(page_artists.content)
+artists = stuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
 
 # Display the overall average
 print ("Overall:")
