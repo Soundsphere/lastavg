@@ -13,7 +13,6 @@ import re
 # set a few things like days and the intereger for the for loop
 days = [7, 30, 90, 180, 365]
 d = len(days)
-a = 0
 
 # Enter your details here. Date format is DD/MM/YYYY
 username = 'StonedEars'
@@ -40,10 +39,9 @@ for i in range (d):
     lastavg = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[2]/p/text()')
     # print the results from the website
     print ("Last " + str(days[i]) + " Days:")
-    print ("Scrobbled Artists: " + lastpage_artists[a])
-    print ("Scrobbled Tracks: " + lastpage_scrobbles[a])
-    print ("Average: " + lastavg[a] + "\n")
-    a + 1
+    print ("Scrobbled Artists: " + lastpage_artists[0])
+    print ("Scrobbled Tracks: " + lastpage_scrobbles[0])
+    print ("Average: " + lastavg[0] + "\n")
 
 # get the current playcount from lastfm overall
 page_scrobbles = requests.get('https://www.last.fm/user/' + username)
