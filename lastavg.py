@@ -10,7 +10,7 @@ from lxml import html
 import requests
 import re
 
-# set a few things like days and the intereger for the for loop
+# set a few things like days and the integer for the for loop
 days = [7, 30, 90, 180, 365]
 d = len(days)
 
