@@ -1,3 +1,7 @@
+# Testing
+
+Playing around with the code a bit. The master branch works, this one might not
+
 # L![lastfmlogo](/docs/icon.png?raw=true "Lastfm")tavg
 :musical_note: :notes:
 Check your average playcount up to four decimals :notes: :musical_note:
