@@ -46,19 +46,27 @@ for i in range (d):
     print ("Average: " + lastavg[0] + "\n")
 
 # get the current playcount from lastfm overall
-page_scrobbles = requests.get('https://www.last.fm/user/' + username)
-stuff = html.fromstring(page_scrobbles.content)
-page_scrobbles = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
-cleancount = int(re.sub("[^\d\.]", "", page_scrobbles[0])) / int(date() + 1)
+def scrobbles():
+    page_scrobbles = requests.get('https://www.last.fm/user/' + username)
+    stuff = html.fromstring(page_scrobbles.content)
+    page_scrobbles = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
+    return page_scrobbles[0]
+
+# get the clean average of scrobbles
+def cleanavg():
+    cleancount = int(re.sub("[^\d\.]", "", scrobbles())) / int(date() + 1)
+    return cleancount
 
 # get the current amount of different artists scrobbled from lastfm overall
-page_artists = requests.get('https://www.last.fm/user/' + username + '/library/artists')
-stuff_artists = html.fromstring(page_artists.content)
-artists = stuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
+def artists():
+    page_artists = requests.get('https://www.last.fm/user/' + username + '/library/artists')
+    stuff_artists = html.fromstring(page_artists.content)
+    artists = stuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
+    return artists[0]
 
 # Display the overall average
 print ("Overall:")
-print ("Scrobbled Artists: " + artists[0])
-print ("Scrobbled Tracks: " + page_scrobbles[0])
+print ("Scrobbled Artists: " + artists())
+print ("Scrobbled Tracks: " + scrobbles())
 print ("Passed Days: " + str(int(date() + 1)))
-print ("Average: " + str("%.4f" % cleancount))
+print ("Average: " + str("%.4f" % cleanavg()))
