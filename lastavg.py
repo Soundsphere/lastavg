@@ -11,7 +11,7 @@ import requests
 import re
 
 # set a few things like days and the integer for the for loop
-days = [7, 30, 90, 180, 365]
+days = 7, 30, 90, 180, 365
 d = len(days)
 
 # Enter your details here. Date format is DD/MM/YYYY
