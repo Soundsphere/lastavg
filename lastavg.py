@@ -1,8 +1,6 @@
 #!/usr/bin/env python
-# This program shows me the average scrobbles per day.
-# Sure, the website tells me as well, but I want to have at least a few
-# decimals, to see the changes over time. It also displays the average scrobbles
-# and artists for the last 7, 30, 90, 180 and 365 on one page
+# Shows all scrobbling info for the last 7, 30, 90, 180, 360 days as well as
+# the scrobbled artist for that timeframe along with the average scrobbles
 
 from datetime import date, datetime
 import time
@@ -19,10 +17,12 @@ username = 'StonedEars'
 joined = '09/01/2009'
 
 # Get the days between today and the lastfm joined date
-date_format = "%d/%m/%Y"
-date_joined = datetime.strptime(joined, date_format)
-today = datetime.strptime(time.strftime("%d/%m/%Y"), date_format)
-delta = today - date_joined
+def date():
+    date_format = "%d/%m/%Y"
+    date_joined = datetime.strptime(joined, date_format)
+    today = datetime.strptime(time.strftime("%d/%m/%Y"), date_format)
+    delta = today - date_joined
+    return delta.days
 
 # Print some sort of header
 print("Stats for " + username + ":\n")
@@ -47,7 +47,7 @@ for i in range (d):
 page_scrobbles = requests.get('https://www.last.fm/user/' + username)
 stuff = html.fromstring(page_scrobbles.content)
 page_scrobbles = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
-cleancount = int(re.sub("[^\d\.]", "", page_scrobbles[0])) / int(delta.days + 1)
+cleancount = int(re.sub("[^\d\.]", "", page_scrobbles[0])) / int(date() + 1)
 
 # get the current amount of different artists scrobbled from lastfm overall
 page_artists = requests.get('https://www.last.fm/user/' + username + '/library/artists')
@@ -58,5 +58,5 @@ artists = stuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/
 print ("Overall:")
 print ("Scrobbled Artists: " + artists[0])
 print ("Scrobbled Tracks: " + page_scrobbles[0])
-print ("Passed Days: " + str(int(delta.days + 1)))
+print ("Passed Days: " + str(int(date() + 1)))
 print ("Average: " + str("%.4f" % cleancount))
