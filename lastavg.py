@@ -28,7 +28,7 @@ delta = today - date_joined
 print("Stats for " + username + ":\n")
 
 # This for-loop iterates 5 times to get the average, the playcount and the scrobbled artists for each number of days
-# stored in the days list and displays the output
+# stored in the days tuple and displays the output
 for i in range (d):
     lastpage_scrobbles = requests.get('https://www.last.fm/user/' + username + '/library?date_preset=LAST_' + str(days[i]) + '_DAYS')
     lastpage_artists = requests.get('https://www.last.fm/user/' + username + '/library/artists?date_preset=LAST_' + str(days[i]) + '_DAYS')
