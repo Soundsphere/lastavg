@@ -8,12 +8,13 @@ from datetime import date, datetime
 import time
 from lxml import html
 import requests
-import re
+import json
 
 # set a few things like days and the integer for the for loop
 days = 7, 30, 90, 180, 365
 d = len(days)
-
+apikey = "269eeebb75b0c41507ec4601f66f92c9"
+baseURL = "http://ws.audioscrobbler.com/2.0/?method="
 # Enter your details here. Date format is DD/MM/YYYY
 username = 'StonedEars'
 joined = '09/01/2009'
@@ -25,6 +26,13 @@ def date():
     today = datetime.strptime(time.strftime("%d/%m/%Y"), date_format)
     delta = today - date_joined
     return delta.days
+
+# Get the playcount from the api
+info = requests.get( baseURL + "user.getinfo&user=" + username + "&api_key=" + apikey + "&format=json")
+infoData = json.loads(info.text)
+# return the playcount
+pc = infoData["user"]
+cc = int((pc["playcount"])) / int(date() + 1)
 
 # Print some sort of header
 print("Stats for " + username + ":\n")
@@ -45,18 +53,6 @@ for i in range (d):
     print ("Scrobbled Tracks: " + lastpage_scrobbles[0])
     print ("Average: " + lastavg[0] + "\n")
 
-# get the current playcount from lastfm overall
-def scrobbles():
-    page_scrobbles = requests.get('https://www.last.fm/user/' + username)
-    stuff = html.fromstring(page_scrobbles.content)
-    page_scrobbles = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
-    return page_scrobbles[0]
-
-# get the clean average of scrobbles
-def cleanavg():
-    cleancount = int(re.sub("[^\d\.]", "", scrobbles())) / int(date() + 1)
-    return cleancount
-
 # get the current amount of different artists scrobbled from lastfm overall
 def artists():
     page_artists = requests.get('https://www.last.fm/user/' + username + '/library/artists')
@@ -67,6 +63,6 @@ def artists():
 # Display the overall average
 print ("Overall:")
 print ("Scrobbled Artists: " + artists())
-print ("Scrobbled Tracks: " + scrobbles())
+print ("Scrobbled Tracks: " + str(pc["playcount"]))
 print ("Passed Days: " + str(int(date() + 1)))
-print ("Average: " + str("%.4f" % cleanavg()))
+print ("Average: " + str("%.4f" % cc))
