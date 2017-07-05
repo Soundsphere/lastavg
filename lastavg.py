@@ -10,14 +10,15 @@ from lxml import html
 import requests
 import json
 
+# Enter your details here. Date format is DD/MM/YYYY
+username = 'StonedEars'
+joined = '09/01/2009'
+
 # set a few things like days and the integer for the for loop
 days = 7, 30, 90, 180, 365
 d = len(days)
 apikey = "269eeebb75b0c41507ec4601f66f92c9"
 baseURL = "http://ws.audioscrobbler.com/2.0/?method="
-# Enter your details here. Date format is DD/MM/YYYY
-username = 'StonedEars'
-joined = '09/01/2009'
 
 # Get the days between today and the lastfm joined date
 def date():
