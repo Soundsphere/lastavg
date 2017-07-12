@@ -33,7 +33,7 @@ infoData = json.loads(info.text)
 # return the playcount
 pc = infoData["user"]
 cc = int((pc["playcount"])) / int(date() + 1)
-
+#commanu = ("{0:,}".format(int(pc["playcount"])))
 # Print some sort of header
 print("Stats for " + username + ":\n")
 
@@ -63,6 +63,6 @@ def artists():
 # Display the overall average
 print("Overall:")
 print("Scrobbled Artists: " + artists())
-print("Scrobbled Tracks: " + str(pc["playcount"]))
+print("Scrobbled Tracks: " + str(("{0:,}".format(int(pc["playcount"])))))
 print("Passed Days: " + str(int(date() + 1)))
 print("Average: " + str("%.4f" % cc))
