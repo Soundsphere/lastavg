@@ -16,7 +16,6 @@ joined = '09/01/2009'
 
 # set a few things like days and the integer for the for loop
 days = 7, 30, 90, 180, 365
-d = len(days)
 apikey = "269eeebb75b0c41507ec4601f66f92c9"
 baseURL = "http://ws.audioscrobbler.com/2.0/?method="
 
@@ -40,7 +39,7 @@ print("Stats for " + username + ":\n")
 
 # This for-loop iterates 5 times to get the average, the playcount and the scrobbled artists for each number of days
 # stored in the days tuple and displays the output
-for i in range (d):
+for i in range(len(days)):
     lastpage_scrobbles = requests.get('https://www.last.fm/user/' + username + '/library?date_preset=LAST_' + str(days[i]) + '_DAYS')
     lastpage_artists = requests.get('https://www.last.fm/user/' + username + '/library/artists?date_preset=LAST_' + str(days[i]) + '_DAYS')
     laststuff_scrobbles = html.fromstring(lastpage_scrobbles.content)
@@ -49,10 +48,10 @@ for i in range (d):
     lastpage_artists = laststuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
     lastavg = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[2]/p/text()')
     # print the results from the website
-    print ("Last " + str(days[i]) + " Days:")
-    print ("Scrobbled Artists: " + lastpage_artists[0])
-    print ("Scrobbled Tracks: " + lastpage_scrobbles[0])
-    print ("Average: " + lastavg[0] + "\n")
+    print("Last " + str(days[i]) + " Days:")
+    print("Scrobbled Artists: " + lastpage_artists[0])
+    print("Scrobbled Tracks: " + lastpage_scrobbles[0])
+    print("Average: " + lastavg[0] + "\n")
 
 # get the current amount of different artists scrobbled from lastfm overall
 def artists():
@@ -62,8 +61,8 @@ def artists():
     return artists[0]
 
 # Display the overall average
-print ("Overall:")
-print ("Scrobbled Artists: " + artists())
-print ("Scrobbled Tracks: " + str(pc["playcount"]))
-print ("Passed Days: " + str(int(date() + 1)))
-print ("Average: " + str("%.4f" % cc))
+print("Overall:")
+print("Scrobbled Artists: " + artists())
+print("Scrobbled Tracks: " + str(pc["playcount"]))
+print("Passed Days: " + str(int(date() + 1)))
+print("Average: " + str("%.4f" % cc))
