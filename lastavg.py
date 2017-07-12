@@ -11,6 +11,7 @@ from lxml import html
 # set a few things like days and the integer for the for loop
 DAYS = 7, 30, 90, 180, 365
 D = len(DAYS)
+
 # Enter your details here. Date format is DD/MM/YYYY
 USERNAME = 'StonedEars'
 JOINED = '09/01/2009'
@@ -22,7 +23,7 @@ def joineddate():
 
     Takes the JOINED constant and calculates the days on lastm.
     """
-    
+
     date_format = "%d/%m/%Y"
     date_joined = datetime.strptime(JOINED, date_format)
     today = datetime.strptime(time.strftime("%d/%m/%Y"), date_format)
@@ -42,7 +43,6 @@ for i in range(D):
     lastpage_scrobbles = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[1]/p/text()')
     lastpage_artists = laststuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
     lastavg = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[2]/p/text()')
-    # print the results from the website
     print("Last " + str(DAYS[i]) + " Days:")
     print("Scrobbled Artists: " + lastpage_artists[0])
     print("Scrobbled Tracks: " + lastpage_scrobbles[0])
