@@ -10,13 +10,19 @@ from lxml import html
 
 # set a few things like days and the integer for the for loop
 DAYS = 7, 30, 90, 180, 365
-
+D = len(DAYS)
 # Enter your details here. Date format is DD/MM/YYYY
 USERNAME = 'StonedEars'
 JOINED = '09/01/2009'
 
 # Get the days between today and the lastfm JOINED date
 def joineddate():
+    """
+    Return the days on last.fm.
+
+    Takes the JOINED constant and calculates the days on lastm.
+    """
+    
     date_format = "%d/%m/%Y"
     date_joined = datetime.strptime(JOINED, date_format)
     today = datetime.strptime(time.strftime("%d/%m/%Y"), date_format)
@@ -26,9 +32,9 @@ def joineddate():
 # Print some sort of header
 print("Stats for " + USERNAME + ":\n")
 
-# This for-loop iterates 5 times to get the average, the playcount and the scrobbled artists for each number of days
-# stored in the days tuple and displays the output
-for i in range(len(DAYS)):
+# This for-loop iterates 5 times to get the average, the playcount and the scrobbled artists for
+# each number of days stored in the days tuple and displays the output
+for i in range(D):
     lastpage_scrobbles = requests.get('https://www.last.fm/user/' + USERNAME + '/library?date_preset=LAST_' + str(DAYS[i]) + '_DAYS')
     lastpage_artists = requests.get('https://www.last.fm/user/' + USERNAME + '/library/artists?date_preset=LAST_' + str(DAYS[i]) + '_DAYS')
     laststuff_scrobbles = html.fromstring(lastpage_scrobbles.content)
@@ -43,8 +49,7 @@ for i in range(len(DAYS)):
     print("Average: " + lastavg[0] + "\n")
 
 # get the current playcount from lastfm overall
-page_scrobbles = requests.get('https://www.last.fm/user/' + USERNAME)
-stuff = html.fromstring(page_scrobbles.content)
+stuff = html.fromstring((requests.get('https://www.last.fm/user/' + USERNAME)).content)
 page_scrobbles = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
 cleancount = int(re.sub("[^\\d\\.]", "", page_scrobbles[0])) / int(joineddate() + 1)
 
