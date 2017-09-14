@@ -35,18 +35,21 @@ print("Stats for " + USERNAME + ":\n")
 
 # This for-loop iterates 5 times to get the average, the playcount and the scrobbled artists for
 # each number of days stored in the days tuple and displays the output
-for i in range(D):
-    lastpage_scrobbles = requests.get('https://www.last.fm/user/' + USERNAME + '/library?date_preset=LAST_' + str(DAYS[i]) + '_DAYS')
-    lastpage_artists = requests.get('https://www.last.fm/user/' + USERNAME + '/library/artists?date_preset=LAST_' + str(DAYS[i]) + '_DAYS')
-    laststuff_scrobbles = html.fromstring(lastpage_scrobbles.content)
-    laststuff_artists = html.fromstring(lastpage_artists.content)
-    lastpage_scrobbles = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[1]/p/text()')
-    lastpage_artists = laststuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
-    lastavg = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[2]/p/text()')
-    print("Last " + str(DAYS[i]) + " Days:")
-    print("Scrobbled Artists: " + lastpage_artists[0])
-    print("Scrobbled Tracks: " + lastpage_scrobbles[0])
-    print("Average: " + lastavg[0] + "\n")
+try:
+    for i in range(D):
+        lastpage_scrobbles = requests.get('https://www.last.fm/user/' + USERNAME + '/library?date_preset=LAST_' + str(DAYS[i]) + '_DAYS')
+        lastpage_artists = requests.get('https://www.last.fm/user/' + USERNAME + '/library/artists?date_preset=LAST_' + str(DAYS[i]) + '_DAYS')
+        laststuff_scrobbles = html.fromstring(lastpage_scrobbles.content)
+        laststuff_artists = html.fromstring(lastpage_artists.content)
+        lastpage_scrobbles = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[1]/p/text()')
+        lastpage_artists = laststuff_artists.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul/li/p/text()')
+        lastavg = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[2]/p/text()')
+        print("Last " + str(DAYS[i]) + " Days:")
+        print("Scrobbled Artists: " + lastpage_artists[0])
+        print("Scrobbled Tracks: " + lastpage_scrobbles[0])
+        print("Average: " + lastavg[0] + "\n")
+except:
+    print("\nWhoops, something bugged out, please try again!\n")
 
 # get the current playcount from lastfm overall
 stuff = html.fromstring((requests.get('https://www.last.fm/user/' + USERNAME)).content)
