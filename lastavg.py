@@ -18,7 +18,7 @@ JOINED = '09/01/2009'
 BASE = 'https://www.last.fm/user/'
 
 # Get the days between today and the lastfm JOINED date
-def joineddate(JOINED):
+def joineddate():
     """
     Return the days on last.fm.
 
