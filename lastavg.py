@@ -29,7 +29,7 @@ def joineddate():
     date_joined = datetime.strptime(JOINED, date_format)
     today = datetime.strptime(time.strftime("%d/%m/%Y"), date_format)
     delta = today - date_joined
-    return delta.days
+    return delta.days + 1
 
 def main():
     # Print some sort of header
@@ -65,7 +65,7 @@ def main():
         print("Overall:")
         print("Scrobbled Artists: " + artists[0])
         print("Scrobbled Tracks: " + page_scrobbles[0])
-        print("Passed Days: " + str(int(joineddate() + 1)))
+        print("Passed Days: " + str(int(joineddate() )))
         print("Average: " + str("%.4f" % cleancount))
     except:
         print("\nWhoops, something bugged out, please try again!\n")
