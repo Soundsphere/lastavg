@@ -10,22 +10,21 @@ Run `pip install -r requirements.txt` to set everything up
 
 
 ## Install
-At the moment there's no executable, so just run the following:
+Either download the executable download the source
+
 ```
 git clone https://github.com/Soundsphere/lastavg.git
 cd lastavg
 python lastavg.py
 ```
 
-_Alternatively you can copy the script into your $PATH and chmod +x the script so that you can just call it from anywhere_
-
 ## Usage
-To use with your own last.fm account, replace the following variables:
+When you run the program the first time, you will be asked for your last.fm
+username and when you joined last.fm.
+Your joined date needs to be in the following format: DD.MM.YYYY
 
-`username` = your last.fm username
-
-`joined` = the date you joined last.fm
-
-## Screenshot
+## Screenshots
+You will be asked for your username and joined date the first time you run the program
+![firstrun](/docs/lastavgscreen1.png?raw=true "lastavg firstrun")
 Here's how the output looks like:
-![lastavgscreenshot](/docs/lastavgscreen.png?raw=true "lastavg output")
+![output](/docs/lastavgscreen.png?raw=true "lastavg output")
