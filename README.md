@@ -7,6 +7,7 @@ Now you can also see the scrobbles and the average from the last 7, 30, 90, 180 
 ---
 ## Requirements
 OS: Linux only
+
 Run `pip install -r requirements.txt` to set everything up
 
 
