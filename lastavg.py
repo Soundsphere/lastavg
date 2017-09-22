@@ -5,9 +5,9 @@
 from datetime import datetime
 import time
 import re
-import requests
 import os
 import configparser
+import requests
 from lxml import html
 
 # set a few things like days, the integer for the for loop and home directory
@@ -37,8 +37,7 @@ def configure():
             except:
                 print("\nPlease use DD.MM.YYYY as the date format\n")
         config = configparser.ConfigParser()
-        config['DEFAULT'] = {'user': username,
-                            'joined': joined_date}
+        config['DEFAULT'] = {'user': username, 'joined': joined_date}
         with open(HOME + '/.config/lastavg/config.cfg', 'w') as configfile:
             config.write(configfile)
 
@@ -74,8 +73,8 @@ def main():
     # each number of days stored in the days tuple and displays the output
     try:
         for i in range(D):
-            lastpage_scrobbles = requests.get( BASE + config['DEFAULT']['user'] + '/library?date_preset=LAST_' + str(DAYS[i]) + '_DAYS')
-            lastpage_artists = requests.get( BASE + config['DEFAULT']['user'] + '/library/artists?date_preset=LAST_' + str(DAYS[i]) + '_DAYS')
+            lastpage_scrobbles = requests.get(BASE + config['DEFAULT']['user'] + '/library?date_preset=LAST_' + str(DAYS[i]) + '_DAYS')
+            lastpage_artists = requests.get(BASE + config['DEFAULT']['user'] + '/library/artists?date_preset=LAST_' + str(DAYS[i]) + '_DAYS')
             laststuff_scrobbles = html.fromstring(lastpage_scrobbles.content)
             laststuff_artists = html.fromstring(lastpage_artists.content)
             lastpage_scrobbles = laststuff_scrobbles.xpath('//*[@id="mantle_skin"]/div[4]/div/div[1]/ul[1]/li[1]/p/text()')
@@ -100,7 +99,7 @@ def main():
         print("Overall:")
         print("Scrobbled Artists: " + artists[0])
         print("Scrobbled Tracks: " + page_scrobbles[0])
-        print("Passed Days: " + str(int(joineddate() )))
+        print("Passed Days: " + str(int(joineddate())))
         print("Average: " + str("%.4f" % cleancount))
     except:
         print("\nWhoops, something bugged out, please try again!\n")
