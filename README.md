@@ -6,11 +6,12 @@ Now you can also see the scrobbles and the average from the last 7, 30, 90, 180 
 
 ---
 ## Requirements
+OS: Linux only
 Run `pip install -r requirements.txt` to set everything up
 
 
 ## Install
-At the moment there's no up-to-date executable so just clone the repo and run the script
+At the moment there's no up-to-date executable so just clone the repo and run the script.
 
 ```
 git clone https://github.com/Soundsphere/lastavg.git
