@@ -24,22 +24,22 @@ def configure():
     Sets up a config file in %HOME/.config/lastavg to store the username and joined date
     This function gets executed when the program is run the first time
     """
-    if not os.path.exists(HOME + "/.config/lastavg/config.cfg"):
-        os.makedirs(HOME + "/.config/lastavg/")
-        username = input("What's your last.fm username? ")
-        while True:
-            try:
-                joined_date = input("When did you join last.fm? ")
-                datetime.strptime(joined_date, '%d.%m.%Y')
-                break
-            except KeyboardInterrupt:
-                raise
-            except:
-                print("\nPlease use DD.MM.YYYY as the date format\n")
-        config = configparser.ConfigParser()
-        config['DEFAULT'] = {'user': username, 'joined': joined_date}
-        with open(HOME + '/.config/lastavg/config.cfg', 'w') as configfile:
-            config.write(configfile)
+    username = input("What's your last.fm username? ")
+    while True:
+        try:
+            joined_date = input("When did you join last.fm? ")
+            datetime.strptime(joined_date, '%d.%m.%Y')
+            break
+        except KeyboardInterrupt:
+            print("\n")
+            quit()
+        except:
+            print("\nPlease use DD.MM.YYYY as the date format\n")
+    os.makedirs(HOME + "/.config/lastavg/")
+    config = configparser.ConfigParser()
+    config['DEFAULT'] = {'user': username, 'joined': joined_date}
+    with open(HOME + '/.config/lastavg/config.cfg', 'w') as configfile:
+        config.write(configfile)
 
 # Get the days between today and the lastfm JOINED date
 def joineddate():
@@ -101,6 +101,9 @@ def main():
         print("Scrobbled Tracks: " + page_scrobbles[0])
         print("Passed Days: " + str(int(joineddate())))
         print("Average: " + str("%.4f" % cleancount))
+    except KeyboardInterrupt:
+        print("\n")
+        quit()
     except:
         print("\nWhoops, something bugged out, please try again!\n")
 
