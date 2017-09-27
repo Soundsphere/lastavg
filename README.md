@@ -12,8 +12,7 @@ Run `pip install -r requirements.txt` to set everything up
 
 
 ## Install
-At the moment there's no up-to-date executable so just clone the repo and run the script.
-
+Either get the latest executable or clone the repo and run the script. Don't forget to chmod the thing, though...
 ```
 git clone https://github.com/Soundsphere/lastavg.git
 cd lastavg
