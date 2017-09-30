@@ -10,6 +10,6 @@ while true; do
 	echo "| | (_| \\__ \\ |_ _|  _| | | | | |"
 	echo "|_|\\__,_|___/\\__(_)_| |_| |_| |_|"
 	echo "Refreshed: $(date +%H:%M), next refresh: $(date +%H:%M --date="900 seconds")"
-	python /home/bene/github/lastavg/lastavg.py
+	python /path/to/lastavg.py
 	sleep 900
 done
