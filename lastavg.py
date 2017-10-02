@@ -1,7 +1,10 @@
 #!/usr/bin/env python
-# Shows all scrobbling info for the last 7, 30, 90, 180, 360 days as well as
-# the scrobbled artist for that timeframe along with the average scrobbles
+"""
+lastavg - scrobbling infos in the terminal
 
+Shows all scrobbling info for the last 7, 30, 90, 180, 360 days as well as
+the scrobbled artist for that timeframe along with the average scrobbles
+"""
 from datetime import datetime
 import time
 import re
@@ -33,7 +36,7 @@ def configure():
         except KeyboardInterrupt:
             print("\n")
             quit()
-        except:
+        except ValueError:
             print("\nPlease use DD.MM.YYYY as the date format\n")
     os.makedirs(HOME + "/.config/lastavg/")
     config = configparser.ConfigParser()
@@ -57,6 +60,11 @@ def joineddate():
     return delta.days + 1
 
 def main():
+    """
+    Main program
+
+    Gets all the data to display
+    """
     # Check if config file is there and load it
     if os.path.exists(HOME + '/.config/lastavg/config.cfg'):
         config = configparser.ConfigParser()
@@ -104,7 +112,7 @@ def main():
     except KeyboardInterrupt:
         print("\n")
         quit()
-    except:
+    except IndexError:
         print("\nWhoops, something bugged out, please try again!\n")
 
 if __name__ == "__main__":
