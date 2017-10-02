@@ -6,6 +6,7 @@ from datetime import datetime
 import time
 import re
 import os
+import sys
 import configparser
 import requests
 from lxml import html
@@ -35,7 +36,8 @@ def configure():
             quit()
         except:
             print("\nPlease use DD.MM.YYYY as the date format\n")
-    os.makedirs(HOME + "/.config/lastavg/")
+    if not os.path.exists(HOME + '/.config/lastavg'):
+        os.makedirs(HOME + "/.config/lastavg/")
     config = configparser.ConfigParser()
     config['DEFAULT'] = {'user': username, 'joined': joined_date}
     with open(HOME + '/.config/lastavg/config.cfg', 'w') as configfile:
@@ -57,6 +59,13 @@ def joineddate():
     return delta.days + 1
 
 def main():
+    # run this to change the username and joined date
+    try:
+        if sys.argv[1] == "set-username":
+            configure()
+    except IndexError:
+        pass
+
     # Check if config file is there and load it
     if os.path.exists(HOME + '/.config/lastavg/config.cfg'):
         config = configparser.ConfigParser()
