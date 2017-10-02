@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-# Shows all scrobbling info for the last 7, 30, 90, 180, 360 days as well as
-# the scrobbled artist for that timeframe along with the average scrobbles
 """
 lastavg
 
-Get your scrobbling data from last.fm neatly displayed nicely
+Shows all scrobbling info for the last 7, 30, 90, 180, 360 days as well as
+the scrobbled artist for that timeframe along with the average scrobbles
 """
 
 from datetime import datetime
@@ -41,8 +40,7 @@ def setup():
             quit()
         except ValueError:
             print("\nPlease use DD.MM.YYYY as the date format\n")
-    if not os.path.exists(HOME + '/.config/lastavg'):
-        os.makedirs(HOME + "/.config/lastavg/")
+    os.makedirs(HOME + "/.config/lastavg/")
     setup_file = configparser.ConfigParser()
     setup_file['DEFAULT'] = {'user': username, 'joined': joined_date}
     with open(HOME + '/.config/lastavg/config.cfg', 'w') as configfile:
@@ -83,13 +81,6 @@ def main():
 
     Here's the main program. It gets the info from last.fm and displays it
     """
-    # run this to change the username and joined date
-    try:
-        if sys.argv[1] == "set-username":
-            setup()
-    except IndexError:
-        pass
-
     # Print some sort of header
     print("Stats for " + load_config()['DEFAULT']['user'] + ":\n")
 
