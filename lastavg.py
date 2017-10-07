@@ -9,6 +9,7 @@ from datetime import datetime
 import time
 import re
 import os
+import sys
 import configparser
 import requests
 from lxml import html
@@ -18,6 +19,11 @@ DAYS = 7, 30, 90, 180, 365
 D = len(DAYS)
 HOME = os.environ['HOME']
 BASE = 'https://www.last.fm/user/'
+
+# check if the running system is linux. If not, exit the script.
+if not sys.platform.startswith('linux'):
+    print("Only Linux is supported")
+    sys.exit()
 
 # inital setup
 def configure():
@@ -35,7 +41,7 @@ def configure():
             break
         except KeyboardInterrupt:
             print("\n")
-            quit()
+            sys.exit()
         except ValueError:
             print("\nPlease use DD.MM.YYYY as the date format\n")
     os.makedirs(HOME + "/.config/lastavg/")
@@ -111,7 +117,7 @@ def main():
         print("Average: " + str("%.4f" % cleancount))
     except KeyboardInterrupt:
         print("\n")
-        quit()
+        sys.exit()
     except IndexError:
         print("\nWhoops, something bugged out, please try again!\n")
 
