@@ -11,8 +11,16 @@ import re
 import os
 import sys
 import configparser
-import requests
-from lxml import html
+try:
+    import requests
+except ModuleNotFoundError:
+    print("Request not installed. Please install the python module requests")
+    sys.exit()
+try:
+    from lxml import html
+except ModuleNotFoundError:
+    print("lxml not installed. Please install the pyhton module lxml")
+    sys.exit()
 
 # set a few things like days, the integer for the for loop and home directory
 DAYS = 7, 30, 90, 180, 365
