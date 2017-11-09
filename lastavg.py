@@ -22,16 +22,16 @@ except ModuleNotFoundError:
     print("lxml not installed. Please install the pyhton module lxml")
     sys.exit()
 
+# check if the running system is linux. If not, exit the script.
+if not sys.platform.startswith('linux'):
+    print("Only Linux is supported")
+    sys.exit()
+
 # set a few things like days, the integer for the for loop and home directory
 DAYS = 7, 30, 90, 180, 365
 D = len(DAYS)
 HOME = os.environ['HOME']
 BASE = 'https://www.last.fm/user/'
-
-# check if the running system is linux. If not, exit the script.
-if not sys.platform.startswith('linux'):
-    print("Only Linux is supported")
-    sys.exit()
 
 # inital setup
 def configure():
