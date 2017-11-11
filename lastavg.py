@@ -15,7 +15,6 @@ try:
     import requests
 except ModuleNotFoundError:
     print("Request not installed. Please install the python module requests")
-    sys.exit()
 try:
     from lxml import html
 except ModuleNotFoundError:
