@@ -14,11 +14,11 @@ import configparser
 try:
     import requests
 except ModuleNotFoundError:
-    print("Request not installed. Please install the python module requests")
+    print("Request not installed. Please run pip install -r requirements.txt")
 try:
     from lxml import html
 except ModuleNotFoundError:
-    print("lxml not installed. Please install the pyhton module lxml")
+    print("lxml not installed. Please run pip install -r requirements.txt")
     sys.exit()
 
 # check if the running system is linux. If not, exit the script.
