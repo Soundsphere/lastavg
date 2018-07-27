@@ -39,7 +39,7 @@ def configure():
     username = input("What's your last.fm username? ")
     while True:
         try:
-            joined_date = input("When did you join last.fm? ")
+            joined_date = input("When did you join last.fm? (Format: DD.MM.YYYY)")
             datetime.strptime(joined_date, '%d.%m.%Y')
             break
         except KeyboardInterrupt:
