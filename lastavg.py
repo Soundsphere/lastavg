@@ -15,8 +15,8 @@ try:
     import requests
     from lxml import html
 except ModuleNotFoundError:
-    print("Requirements not intslled. Pleaes run pip install -r requirements.txt")
- 
+    print("Requirements not installed. Pleaes run pip install -r requirements.txt")
+
 # check if the running system is linux. If not, exit the script.
 if not sys.platform.startswith('linux'):
     print("Only Linux is supported")
