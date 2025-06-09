@@ -47,7 +47,7 @@ def configure():
             sys.exit()
         except ValueError:
             print("\nPlease use DD.MM.YYYY as the date format\n")
-    os.makedirs(HOME + "/.config/lastavg/")
+    os.makedirs(HOME + "/.config/lastavg/", exist_ok=True)
     config = configparser.ConfigParser()
     config['DEFAULT'] = {'user': username, 'joined': joined_date}
     with open(HOME + '/.config/lastavg/config.cfg', 'w') as configfile:
@@ -105,7 +105,7 @@ def main():
         # get the current playcount from lastfm overall
         stuff = html.fromstring((requests.get(BASE + config['DEFAULT']['user'])).content)
         page_scrobbles = stuff.xpath('//*[@id="content"]/div[2]/header/div[2]/div/div[2]/div[2]/ul/li[1]/p/a/text()')
-        cleancount = int(re.sub("[^\\d\\.]", "", page_scrobbles[0])) / int(joineddate() + 1)
+        cleancount = int(re.sub("[^\\d\\.]", "", page_scrobbles[0])) / joineddate()
 
         # get the current amount of different artists scrobbled from lastfm overall
         page_artists = requests.get(BASE + config['DEFAULT']['user'] + '/library/artists')
