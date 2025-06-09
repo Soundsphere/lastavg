@@ -29,3 +29,9 @@ You will be asked for your username and joined date the first time you run the p
 ![firstrun](/docs/lastavgscreen1.png?raw=true "lastavg firstrun")
 Here's how the output looks like:
 ![output](/docs/lastavgscreen.png?raw=true "lastavg output")
+
+## Running tests
+After installing the dependencies listed in `requirements.txt`, run:
+```
+pytest
+```
